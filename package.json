@@ -1,0 +1,27 @@
+{
+  "name": "lambda-url-to-html",
+  "version": "1.0.0",
+  "description": "AWS Lambda functions in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "lambda-build upload lambda-url-to-html -r us-west-1",
+    "test": "mocha --recursive test --extension ts --exit --require esbuild-register --timeout 20000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.3.1",
+    "@types/sinon": "^10.0.15",
+    "esbuild-register": "^3.4.2",
+    "mocha": "^10.2.0",
+    "sinon": "^15.2.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.358.0",
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
