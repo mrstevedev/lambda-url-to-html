@@ -17,16 +17,18 @@ const executeLambda = async (
   return outputBody;
 };
 
+const name = "__file_name__";
+const s3UrlFile = "http://s3fileUrl.com";
+const title = "This is the title of webapps.sandiego.gov/sdfiredispatch";
+
 afterEach(restore);
 
 describe("handler", () => {
-  const s3UrlFile = "http://s3fileUrl.com";
-  const title = "This is the title of webapps.sandiego.gov/sdfiredispatch";
-  stub(axios, "get").resolves({
-    data: `<html><head><title>${title}</title></head></html>`,
-  });
-  stub(storage, "storeHtmlFile").resolves(s3UrlFile);
   it("should get the html from a url", async () => {
+    stub(axios, "get").resolves({
+      data: `<html><head><title>${title}</title></head></html>`,
+    });
+    stub(storage, "storeHtmlFile").resolves(s3UrlFile);
     const output = await executeLambda(
       "https://webapps.sandiego.gov/sdfiredispatch/",
       ""
@@ -35,7 +37,6 @@ describe("handler", () => {
     strictEqual(output?.s3_url, s3UrlFile);
   });
   it("should extract and return the page title of a url", async () => {
-    const name = "__file_name__";
     const html = `<html><head><title>${title}</title></head></html>`;
     stub(axios, "get").resolves({
       data: html,
