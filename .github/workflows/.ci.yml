@@ -6,6 +6,12 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
+          role-session-name: MySessionName
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -19,3 +25,6 @@ jobs:
       - name: test
         run: |
           npm test
+      - name: deploy
+        run: |
+          npm run deploy
