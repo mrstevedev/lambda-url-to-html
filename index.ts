@@ -54,7 +54,7 @@ export const handler = async (
   try {
     const body = event.queryStringParameters as unknown as Input;
 
-    if (!body.name || !body.url) {
+    if (!body?.name || !body?.url) {
       throw new Error("name and url are required");
     }
 
