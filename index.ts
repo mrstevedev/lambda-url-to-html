@@ -54,8 +54,8 @@ export const handler = async (
   try {
     const body = event.queryStringParameters as unknown as Input;
 
-    if (!body.name || body.url) {
-      throw new Error("name ad url are required");
+    if (!body.name || !body.url) {
+      throw new Error("name and url are required");
     }
 
     const res = await axios.get(body.url);
