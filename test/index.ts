@@ -31,7 +31,7 @@ describe("handler", () => {
     stub(storage, "storeHtmlFile").resolves(s3UrlFile);
     const output = await executeLambda(
       "https://webapps.sandiego.gov/sdfiredispatch/",
-      ""
+      name
     );
     // console.log({ output });
     strictEqual(output?.s3_url, s3UrlFile);
@@ -42,7 +42,6 @@ describe("handler", () => {
       data: html,
     });
     const storeHtmlFile = stub(storage, "storeHtmlFile").resolves(s3UrlFile);
-
     const output = await executeLambda(
       "https://webapps.sandiego.gov/sdfiredispatch/",
       name
