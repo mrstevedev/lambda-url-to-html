@@ -1,0 +1,21 @@
+name: ci;
+
+on: push
+
+jobs:
+  ci:
+    runs-on: unbuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          # Lambda function is set to Node.js 18.x under runtime settings
+          node-version: "18"
+      - name: npm ci
+        env:
+          CI: true
+        run: |
+          npm ci
+      - name: test
+        run: |
+          npm test
